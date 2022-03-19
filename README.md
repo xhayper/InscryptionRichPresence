@@ -2,14 +2,6 @@
 
 Add an API for Discord RPC as well as adding it own Rich Presence
 
-## API Docs
-
-To set the application id, Call `InscryptionRichPresence.API.PublicRichPresence.SetApplicationID("1234567890")`;
-
-By default, This mod will handle everything by itself, You can turn it off by calling `InscryptionRichPresence.EventHandler.UnsubscribeEvent()`,
-
-The main API is provied in `InscryptionRichPresence.API`, We have `InscryptionRichPresence.API.PublicRichPresence` and `InscryptionRichPresence.API.PublicUser`.
-
 ## Example Usage
 
 ```cs
