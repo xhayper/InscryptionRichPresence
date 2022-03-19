@@ -1,3 +1,4 @@
+# !! ALPHA !!
 # InscryptionRichPresence
 
 Add an API for Discord RPC as well as adding it own Rich Presence
