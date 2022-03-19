@@ -37,3 +37,6 @@ namespace ExamplePlugin
 
 - Q: What dependencies i need to include?
 - A: [Newtonsoft.Json](https://www.newtonsoft.com/json) and [DiscordRichPresence](https://github.com/Lachee/discord-rpc-csharp)
+
+- Q: What's `NativeNamedPipe` / How do i get it?
+- A: It's used as alternative to C#'s vanilla named pipe, Since Unity broke it, You can get it [here](https://github.com/Lachee/unity-named-pipes/tree/master/UnityNamedPipe.Native)
