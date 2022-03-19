@@ -22,7 +22,7 @@ namespace ExamplePlugin
             API.PublicRichPresence.SetPresence(new RichPresence() // Set the Presence
             {
                 State = "Hello, World!",
-                Timestamps = Plugin.startTimestamps
+                Timestamps = Timestamps.Now
             });
         }
 
