@@ -18,7 +18,7 @@ namespace ExamplePlugin
         private void Awake()
         {
 
-            API.PublicRichPresence.SetApplicationID("954242645834735617");
+            API.PublicRichPresence.SetApplicationID("1234567890");
             API.PublicRichPresence.SetPresence(new RichPresence()
             {
                 State = "Hello, World!",
