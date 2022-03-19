@@ -74,8 +74,7 @@ namespace InscryptionRichPresence
                     currentState = State.TRADE;
                     break;
                 default:
-                    state = "Unknown Control Mode, please report this to the developer. (Read Log)";
-                    Plugin.logger.LogInfo($"Unknown Control Mode: {mode}");
+                    Plugin.logger.LogError($"Unknown Control Mode: {mode} (Please report to Dev)");
                     currentState = State.UNKNOW;
                     break;
             }
@@ -87,7 +86,7 @@ namespace InscryptionRichPresence
                     LargeImageText = "Inscryption"
                 },
                 State = state,
-                Timestamps = Timestamps.Now
+                Timestamps = currentState == State.UNKNOW ? Plugin.startTimestamps :  Timestamps.Now
             });
         }
 

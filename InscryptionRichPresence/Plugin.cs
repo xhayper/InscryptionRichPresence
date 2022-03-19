@@ -17,13 +17,26 @@ namespace InscryptionRichPresence
         internal static DiscordRpcClient client;
         internal static IntPtr libHandle;
 
+        public static Timestamps startTimestamps = Timestamps.Now;
+
         private void Awake()
         {
             libHandle = Native.LoadLibrary($"{Paths.PluginPath}\\{PluginInfo.PLUGIN_NAME}\\NativeNamedPipe.dll");
             if (libHandle == IntPtr.Zero) throw new Exception(string.Format("Failed to load nessecary library (ErrorCode: {0})", Marshal.GetLastWin32Error()));
             logger = Logger;
             harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginInfo.PLUGIN_GUID);
+
             API.PublicRichPresence.SetApplicationID("954242645834735617");
+            API.PublicRichPresence.SetPresence(new RichPresence()
+            {
+                Assets = new Assets()
+                {
+                    LargeImageKey = "logo",
+                    LargeImageText = "Inscryption"
+                },
+                State = "Total Misplay",
+                Timestamps = Plugin.startTimestamps
+            });
         }
 
         private void Update()
