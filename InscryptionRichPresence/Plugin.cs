@@ -27,7 +27,7 @@ namespace InscryptionRichPresence
             client = new DiscordRpcClient("954242645834735617", -1, null, false, new UnityNamedPipe());
             client.SkipIdenticalPresence = true;
             client.Initialize();
-            client.SetPresence(new RichPresence()
+            API.PublicRichPresence.SetPresence(new RichPresence()
             {
                 State = "Loading...",
             });
