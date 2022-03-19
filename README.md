@@ -18,13 +18,22 @@ namespace ExamplePlugin
         private void Awake()
         {
 
-            API.PublicRichPresence.SetApplicationID("1234567890");
-            API.PublicRichPresence.SetPresence(new RichPresence()
+            API.PublicRichPresence.SetApplicationID("1234567890"); // Setting this to your own application ID
+            API.PublicRichPresence.SetPresence(new RichPresence() // Set the Presence
             {
                 State = "Hello, World!",
                 Timestamps = Plugin.startTimestamps
             });
         }
+
     }
 }
 ```
+
+## FAQ
+
+- Q: How to disable default behaviour?
+- A: Calling `InscryptionRichPresence.EventHandler.UnsubscribeEvent()`
+
+- Q: What dependencies i need to include?
+- A: [Newtonsoft.Json](https://www.newtonsoft.com/json) and [DiscordRichPresence](https://github.com/Lachee/discord-rpc-csharp)
