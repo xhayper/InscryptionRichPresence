@@ -24,13 +24,7 @@ namespace InscryptionRichPresence
             if (libHandle == IntPtr.Zero) throw new Exception(string.Format("Failed to load nessecary library (ErrorCode: {0})", Marshal.GetLastWin32Error()));
             logger = Logger;
             harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginInfo.PLUGIN_GUID);
-            client = new DiscordRpcClient("954242645834735617", -1, null, false, new UnityNamedPipe());
-            client.SkipIdenticalPresence = true;
-            client.Initialize();
-            API.PublicRichPresence.SetPresence(new RichPresence()
-            {
-                State = "Loading...",
-            });
+            API.PublicRichPresence.SetApplicationID("954242645834735617");
         }
 
         private void Update()
