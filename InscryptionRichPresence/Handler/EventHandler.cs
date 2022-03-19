@@ -1,11 +1,28 @@
+using static DiskCardGame.ViewController;
 using DiskCardGame;
+using DiscordRPC;
 
 namespace InscryptionRichPresence
 {
     public static class EventHandler
     {
 
+        public enum State
+        {
+            MAP,
+            BATTLE,
+            CHOOSING_CARD,
+            CHOOSING_RARE_CARD,
+            TRADE_TOOTH,
+            TRADE_PELT,
+            TRADE,
+            UNKNOW
+        }
+
+
         internal static bool isActive = false;
+
+        public static State currentState;
 
         public static void SubscribeEvent()
         {
@@ -17,8 +34,61 @@ namespace InscryptionRichPresence
             isActive = false;
         }
 
-        internal static void onCameraChangeState(VideoCameraRig.State newState) {
-            Plugin.logger.LogInfo(newState);
+        internal static void onViewControlModeSwitch(ControlMode mode)
+        {
+            State previousState = currentState;
+            string state = "";
+            switch (mode)
+            {
+                case ControlMode.CardGameDefault:
+                case ControlMode.CardGameChoosingSlot:
+                case ControlMode.CardGameChooseDraw:
+                case ControlMode.CardGame5Slots:
+                    state = !StoryEventsData.EventCompleted(StoryEvent.BasicTutorialCompleted) ? "In tutorial..." : "In battle...";
+                    currentState = State.BATTLE;
+                    break;
+                case ControlMode.Map:
+                case ControlMode.MapNoDeckReview:
+                    state = "Walking through the map...";
+                    currentState = State.MAP;
+                    break;
+                case ControlMode.CardChoice:
+                case ControlMode.CardChoiceCloser:
+                    state = "Choosing a card...";
+                    currentState = State.CHOOSING_CARD;
+                    break;
+                case ControlMode.RareCardChoice:
+                    state = "Choosing a rare card...";
+                    currentState = State.CHOOSING_RARE_CARD;
+                    break;
+                case ControlMode.TradePelts:
+                    state = "Trading for pelts...";
+                    currentState = State.TRADE_TOOTH;
+                    break;
+                case ControlMode.TraderCardsForPeltsPhase:
+                    state = "Trading pelts for card...";
+                    currentState = State.TRADE_PELT;
+                    break;
+                case ControlMode.Trading:
+                    state = "Trading...";
+                    currentState = State.TRADE;
+                    break;
+                default:
+                    state = "Unknown Control Mode, please report this to the developer. (Read Log)";
+                    Plugin.logger.LogInfo($"Unknown Control Mode: {mode}");
+                    currentState = State.UNKNOW;
+                    break;
+            }
+            if (previousState != currentState) API.PublicRichPresence.SetPresence(new RichPresence()
+            {
+                Assets = new Assets()
+                {
+                    LargeImageKey = "logo",
+                    LargeImageText = "Inscryption"
+                },
+                State = state,
+                Timestamps = Timestamps.Now
+            });
         }
 
     }

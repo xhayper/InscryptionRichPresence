@@ -51,13 +51,6 @@ namespace InscryptionRichPresence.API
             client.ClearPresence();
         }
 
-        public static void SetApplicationID(string applicationID)
-        {
-            if (client != null) client.Dispose();
-            client = new DiscordRpcClient(applicationID, -1, null, false, new UnityNamedPipe());
-            Initialize();
-        }
-
         public static RichPresence UpdateClearTime()
         {
             return client.UpdateClearTime();
@@ -103,15 +96,19 @@ namespace InscryptionRichPresence.API
             return client.UpdateState(state);
         }
 
+        public static void SetApplicationID(string applicationID)
+        {
+            bool IsInitializedBefore = client != null;
+            if (IsInitializedBefore) client.Dispose();
+            client = new DiscordRpcClient(applicationID, -1, null, false, new UnityNamedPipe());
+            Initialize();
+            if (!IsInitializedBefore) EventHandler.SubscribeEvent();
+        }
+
         internal static void Initialize()
         {
             client.SkipIdenticalPresence = true;
             client.Initialize();
-            API.PublicRichPresence.SetPresence(new RichPresence()
-            {
-                State = "Loading...",
-            });
-            EventHandler.SubscribeEvent();
         }
     }
 }
