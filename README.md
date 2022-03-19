@@ -16,7 +16,7 @@ This is the recommended way to install this plugin on the game.
 If you are installing this manually, do the following
 
 1. Extract the archive into a folder. Do not extract into the game folder.
-2. Move the _InscryptionRichPresence.dll_ and the _InscryptionRichPresence_ into the _BepInEx/plugins_ folder.
+2. Move the _InscryptionRichPresence.dll_ file and the _InscryptionRichPresence_ folder into the _BepInEx/plugins_ folder.
 3. Run the game.
 
 ## Example API Usage
