@@ -1,0 +1,7 @@
+.vscode/
+.cache/
+.idea/
+
+bin/
+lib/
+obj/
