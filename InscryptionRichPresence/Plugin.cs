@@ -34,7 +34,7 @@ namespace InscryptionRichPresence
                     LargeImageKey = "icon",
                     LargeImageText = "Inscryption"
                 },
-                State = "Total Misplay",
+                State = EventHandler.getTextFromState(EventHandler.State.UNKNOW),
                 Timestamps = Plugin.startTimestamps
             });
         }

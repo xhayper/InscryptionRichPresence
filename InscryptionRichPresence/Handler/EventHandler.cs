@@ -37,6 +37,7 @@ namespace InscryptionRichPresence
 
         internal static void onGameStateChanged(GameState state)
         {
+            if (state != GameState.Map && state != GameState.FirstPerson3D) return;
             API.PublicRichPresence.SetPresence(new RichPresence()
             {
                 Assets = new Assets()
@@ -84,9 +85,9 @@ namespace InscryptionRichPresence
             switch (state)
             {
                 case State.BATTLE:
-                    return !StoryEventsData.EventCompleted(StoryEvent.BasicTutorialCompleted) ? "In tutorial..." : "In battle...";
+                    return !StoryEventsData.EventCompleted(StoryEvent.BasicTutorialCompleted) ? "In tutorial..." : "In card battle...";
                 case State.MAP:
-                    return "Walking through the map...";
+                    return "Travelling through the map...";
                 case State.CHOOSING_CARD:
                     return "Choosing a card...";
                 case State.CHOOSING_RARE_CARD:
@@ -101,7 +102,7 @@ namespace InscryptionRichPresence
                     return "Merging card...";
                 case State.UNKNOW:
                 default:
-                    return "Total Misplay";
+                    return "Unknown state...";
             }
         }
 
