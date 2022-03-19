@@ -75,6 +75,7 @@ namespace InscryptionRichPresence
                     break;
                 default:
                     Plugin.logger.LogError($"Unknown Control Mode: {mode} (Please report to Dev)");
+                    state = "Total Misplay";
                     currentState = State.UNKNOW;
                     break;
             }
