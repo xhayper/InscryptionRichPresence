@@ -1,6 +1,5 @@
 using System.Runtime.InteropServices;
 using System.Reflection;
-using DiscordRPC.Unity;
 using BepInEx.Logging;
 using DiscordRPC;
 using HarmonyLib;
