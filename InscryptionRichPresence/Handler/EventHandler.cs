@@ -1,6 +1,7 @@
 using static DiskCardGame.ViewController;
 using DiskCardGame;
 using DiscordRPC;
+using System;
 
 namespace InscryptionRichPresence
 {
@@ -25,14 +26,26 @@ namespace InscryptionRichPresence
 
         public static State currentState;
 
-        public static void SubscribeEvent()
+        public static void Enable()
         {
             isActive = true;
         }
 
-        public static void UnsubscribeEvent()
+        public static void Disable()
         {
             isActive = false;
+        }
+
+        [Obsolete("SubscribeEvent is deprecated, please use Enable instead.")]
+        public static void SubscribeEvent()
+        {
+            Enable();
+        }
+
+        [Obsolete("UnsubscribeEvent is deprecated, please use Disable instead.")]
+        public static void UnsubscribeEvent()
+        {
+            Disable();
         }
 
         internal static void onGameStateChanged(GameState state)

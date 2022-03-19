@@ -102,7 +102,7 @@ namespace InscryptionRichPresence.API
             if (IsInitializedBefore) client.Dispose();
             client = new DiscordRpcClient(applicationID, -1, null, false, new UnityNamedPipe());
             Initialize();
-            if (!IsInitializedBefore) EventHandler.SubscribeEvent();
+            if (!IsInitializedBefore) EventHandler.Enable();
         }
 
         internal static void Initialize()
