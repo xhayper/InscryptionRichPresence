@@ -31,7 +31,7 @@ namespace InscryptionRichPresence
             {
                 Assets = new Assets()
                 {
-                    LargeImageKey = "logo",
+                    LargeImageKey = "icon",
                     LargeImageText = "Inscryption"
                 },
                 State = "Total Misplay",

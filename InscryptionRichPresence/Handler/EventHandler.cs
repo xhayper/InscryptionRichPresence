@@ -16,6 +16,7 @@ namespace InscryptionRichPresence
             TRADE_TOOTH,
             TRADE_PELT,
             TRADE,
+            MERGE_CARD,
             UNKNOW
         }
 
@@ -73,6 +74,10 @@ namespace InscryptionRichPresence
                     state = "Trading...";
                     currentState = State.TRADE;
                     break;
+                case ControlMode.CardMerging:
+                    state = "Merging card...";
+                    currentState = State.MERGE_CARD;
+                    break;
                 default:
                     Plugin.logger.LogError($"Unknown Control Mode: {mode} (Please report to Dev)");
                     state = "Total Misplay";
@@ -83,7 +88,7 @@ namespace InscryptionRichPresence
             {
                 Assets = new Assets()
                 {
-                    LargeImageKey = "logo",
+                    LargeImageKey = "icon",
                     LargeImageText = "Inscryption"
                 },
                 State = state,
