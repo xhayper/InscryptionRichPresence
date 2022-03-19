@@ -35,65 +35,95 @@ namespace InscryptionRichPresence
             isActive = false;
         }
 
-        internal static void onViewControlModeSwitch(ControlMode mode)
+        internal static void onGameStateChanged(GameState state)
         {
-            State previousState = currentState;
-            string state = "";
-            switch (mode)
-            {
-                case ControlMode.CardGameDefault:
-                case ControlMode.CardGameChoosingSlot:
-                case ControlMode.CardGameChooseDraw:
-                case ControlMode.CardGame5Slots:
-                    state = !StoryEventsData.EventCompleted(StoryEvent.BasicTutorialCompleted) ? "In tutorial..." : "In battle...";
-                    currentState = State.BATTLE;
-                    break;
-                case ControlMode.Map:
-                case ControlMode.MapNoDeckReview:
-                    state = "Walking through the map...";
-                    currentState = State.MAP;
-                    break;
-                case ControlMode.CardChoice:
-                case ControlMode.CardChoiceCloser:
-                    state = "Choosing a card...";
-                    currentState = State.CHOOSING_CARD;
-                    break;
-                case ControlMode.RareCardChoice:
-                    state = "Choosing a rare card...";
-                    currentState = State.CHOOSING_RARE_CARD;
-                    break;
-                case ControlMode.TradePelts:
-                    state = "Trading for pelts...";
-                    currentState = State.TRADE_TOOTH;
-                    break;
-                case ControlMode.TraderCardsForPeltsPhase:
-                    state = "Trading pelts for card...";
-                    currentState = State.TRADE_PELT;
-                    break;
-                case ControlMode.Trading:
-                    state = "Trading...";
-                    currentState = State.TRADE;
-                    break;
-                case ControlMode.CardMerging:
-                    state = "Merging card...";
-                    currentState = State.MERGE_CARD;
-                    break;
-                default:
-                    Plugin.logger.LogError($"Unknown Control Mode: {mode} (Please report to Dev)");
-                    state = "Total Misplay";
-                    currentState = State.UNKNOW;
-                    break;
-            }
-            if (previousState != currentState) API.PublicRichPresence.SetPresence(new RichPresence()
+            API.PublicRichPresence.SetPresence(new RichPresence()
             {
                 Assets = new Assets()
                 {
                     LargeImageKey = "icon",
                     LargeImageText = "Inscryption"
                 },
-                State = state,
-                Timestamps = currentState == State.UNKNOW ? Plugin.startTimestamps :  Timestamps.Now
+                State = state == GameState.FirstPerson3D ? "Walking around..." : getTextFromState(currentState),
+                Timestamps = currentState == State.UNKNOW ? Plugin.startTimestamps : Timestamps.Now
             });
+        }
+
+        internal static State getStateFromControlMode(ControlMode mode)
+        {
+            switch (mode)
+            {
+                case ControlMode.CardGameDefault:
+                case ControlMode.CardGameChoosingSlot:
+                case ControlMode.CardGameChooseDraw:
+                case ControlMode.CardGame5Slots:
+                    return State.BATTLE;
+                case ControlMode.Map:
+                case ControlMode.MapNoDeckReview:
+                    return State.MAP;
+                case ControlMode.CardChoice:
+                case ControlMode.CardChoiceCloser:
+                    return State.CHOOSING_CARD;
+                case ControlMode.RareCardChoice:
+                    return State.CHOOSING_RARE_CARD;
+                case ControlMode.TradePelts:
+                    return State.TRADE_TOOTH;
+                case ControlMode.TraderCardsForPeltsPhase:
+                    return State.TRADE_PELT;
+                case ControlMode.Trading:
+                    return State.TRADE;
+                case ControlMode.CardMerging:
+                    return State.MERGE_CARD;
+                default:
+                    return State.UNKNOW;
+            }
+        }
+
+        internal static string getTextFromState(State state)
+        {
+            switch (state)
+            {
+                case State.BATTLE:
+                    return !StoryEventsData.EventCompleted(StoryEvent.BasicTutorialCompleted) ? "In tutorial..." : "In battle...";
+                case State.MAP:
+                    return "Walking through the map...";
+                case State.CHOOSING_CARD:
+                    return "Choosing a card...";
+                case State.CHOOSING_RARE_CARD:
+                    return "Choosing a rare card...";
+                case State.TRADE_TOOTH:
+                    return "Trading for pelts...";
+                case State.TRADE_PELT:
+                    return "Trading pelts for card...";
+                case State.TRADE:
+                    return "Trading...";
+                case State.MERGE_CARD:
+                    return "Merging card...";
+                case State.UNKNOW:
+                default:
+                    return "Total Misplay";
+            }
+        }
+
+        internal static void onViewControlModeSwitch(ControlMode mode)
+        {
+            State previousState = currentState;
+            currentState = getStateFromControlMode(mode);
+            string state = getTextFromState(currentState);
+            if (previousState != currentState)
+            {
+                if (currentState == State.UNKNOW) Plugin.logger.LogError($"Unknown Control Mode: {mode} (Please report to Dev)");
+                API.PublicRichPresence.SetPresence(new RichPresence()
+                {
+                    Assets = new Assets()
+                    {
+                        LargeImageKey = "icon",
+                        LargeImageText = "Inscryption"
+                    },
+                    State = state,
+                    Timestamps = currentState == State.UNKNOW ? Plugin.startTimestamps : Timestamps.Now
+                });
+            }
         }
 
     }
