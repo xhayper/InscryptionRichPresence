@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>InscryptionRichPresence</AssemblyName>
 		<Description>Add an API for Discord RPC as well as adding it own Rich Presence</Description>
-		<Version>0.0.1</Version>
+		<Version>0.0.2</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>

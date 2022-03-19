@@ -3,6 +3,7 @@ using System.Reflection;
 using BepInEx.Logging;
 using DiscordRPC;
 using HarmonyLib;
+using System.IO;
 using BepInEx;
 using System;
 
@@ -12,6 +13,7 @@ namespace InscryptionRichPresence
     public class Plugin : BaseUnityPlugin
     {
 
+        internal static string AssemblyDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         internal static ManualLogSource logger;
         internal static Harmony harmony;
         internal static DiscordRpcClient client;
@@ -21,7 +23,14 @@ namespace InscryptionRichPresence
 
         private void Awake()
         {
-            libHandle = Native.LoadLibrary($"{Paths.PluginPath}\\{PluginInfo.PLUGIN_NAME}\\NativeNamedPipe.dll");
+            string pathToDLL = $"{AssemblyDirectory}\\{PluginInfo.PLUGIN_NAME}\\NativeNamedPipe.dll";
+            if (!File.Exists(pathToDLL))
+            {
+                pathToDLL = $"{AssemblyDirectory}\\NativeNamedPipe.dll";
+                if (!File.Exists(pathToDLL))
+                    throw new Exception("Can't find the library file");
+            }
+            libHandle = Native.LoadLibrary(pathToDLL);
             if (libHandle == IntPtr.Zero) throw new Exception(string.Format("Failed to load nessecary library (ErrorCode: {0})", Marshal.GetLastWin32Error()));
             logger = Logger;
             harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginInfo.PLUGIN_GUID);
