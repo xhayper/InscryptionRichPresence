@@ -1,4 +1,5 @@
 using static DiskCardGame.ViewController;
+using System.Collections.Generic;
 using DiskCardGame;
 using DiscordRPC;
 using System;
@@ -58,6 +59,10 @@ namespace InscryptionRichPresence
                     LargeImageKey = "icon",
                     LargeImageText = "Inscryption"
                 },
+                Buttons = (new List<DiscordRPC.Button> { new DiscordRPC.Button() {
+                    Label = "Play Inscryption",
+                    Url = "https://store.steampowered.com/app/1092790/Inscryption/"
+                }}).ToArray(),
                 State = state == GameState.FirstPerson3D ? "Walking around..." : getTextFromState(currentState),
                 Timestamps = currentState == State.UNKNOW ? Plugin.startTimestamps : Timestamps.Now
             });
@@ -134,6 +139,10 @@ namespace InscryptionRichPresence
                         LargeImageKey = "icon",
                         LargeImageText = "Inscryption"
                     },
+                    Buttons = (new List<DiscordRPC.Button> { new DiscordRPC.Button() {
+                        Label = "Play Inscryption",
+                        Url = "https://store.steampowered.com/app/1092790/Inscryption/"
+                    }}).ToArray(),
                     State = state,
                     Timestamps = currentState == State.UNKNOW ? Plugin.startTimestamps : Timestamps.Now
                 });

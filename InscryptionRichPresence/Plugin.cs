@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 using System.Reflection;
 using BepInEx.Logging;
 using DiscordRPC;
@@ -43,6 +44,10 @@ namespace InscryptionRichPresence
                     LargeImageKey = "icon",
                     LargeImageText = "Inscryption"
                 },
+                Buttons = (new List<DiscordRPC.Button> { new DiscordRPC.Button() {
+                    Label = "Play Inscryption",
+                    Url = "https://store.steampowered.com/app/1092790/Inscryption/"
+                }}).ToArray(),
                 State = EventHandler.getTextFromState(EventHandler.State.UNKNOW),
                 Timestamps = Plugin.startTimestamps
             });
