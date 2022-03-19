@@ -1,0 +1,7 @@
+{
+  "name": "InscryptionRichPresence",
+  "description": "Add an API for Discord RPC as well as adding it own Rich Presence",
+  "version_number": "0.0.1",
+  "website_url": "https://github.com/xhayper/InscryptionRichPresence",
+  "dependencies": []
+}
