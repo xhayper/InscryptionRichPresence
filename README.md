@@ -1,4 +1,5 @@
 # !! ALPHA !!
+
 # InscryptionRichPresence
 
 Add an API for Discord RPC as well as adding it own Rich Presence
@@ -29,12 +30,11 @@ using BepInEx;
 namespace ExamplePlugin
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+    [BepInDependency("io.github.xhayper.inscryprionrichpresence")]
     public class Plugin : BaseUnityPlugin
     {
-
         private void Awake()
         {
-
             API.PublicRichPresence.SetApplicationID("1234567890"); // Setting this to your own application ID
             API.PublicRichPresence.SetPresence(new RichPresence() // Set the Presence
             {
@@ -50,7 +50,7 @@ namespace ExamplePlugin
 ## FAQ
 
 - Q: How to disable default behaviour?
-- A: Calling `InscryptionRichPresence.EventHandler.UnsubscribeEvent()`
+- A: Calling `InscryptionRichPresence.EventHandler.Disable()`
 
 - Q: What dependencies i need to include?
 - A: [Newtonsoft.Json](https://www.newtonsoft.com/json) and [DiscordRichPresence](https://github.com/Lachee/discord-rpc-csharp)

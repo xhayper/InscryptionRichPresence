@@ -10,10 +10,10 @@ using System;
 
 namespace InscryptionRichPresence
 {
-    [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+    [BepInPlugin(PluginGuid, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
-
+        internal const string PluginGuid = "io.github.xhayper.inscryprionrichpresence";
         internal static string AssemblyDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         internal static ManualLogSource logger;
         internal static Harmony harmony;
@@ -34,7 +34,7 @@ namespace InscryptionRichPresence
             libHandle = Native.LoadLibrary(pathToDLL);
             if (libHandle == IntPtr.Zero) throw new Exception(string.Format("Failed to load nessecary library (ErrorCode: {0})", Marshal.GetLastWin32Error()));
             logger = Logger;
-            harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginInfo.PLUGIN_GUID);
+            harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginGuid);
 
             API.PublicRichPresence.SetApplicationID("954242645834735617");
             API.PublicRichPresence.SetPresence(new RichPresence()
