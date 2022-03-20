@@ -37,20 +37,7 @@ namespace InscryptionRichPresence
             harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginGuid);
 
             API.PublicRichPresence.SetApplicationID("954242645834735617");
-            API.PublicRichPresence.SetPresence(new RichPresence()
-            {
-                Assets = new Assets()
-                {
-                    LargeImageKey = "icon",
-                    LargeImageText = "Inscryption"
-                },
-                Buttons = (new List<DiscordRPC.Button> { new DiscordRPC.Button() {
-                    Label = "Play Inscryption",
-                    Url = "https://store.steampowered.com/app/1092790/Inscryption/"
-                }}).ToArray(),
-                State = EventHandler.getTextFromState(EventHandler.State.UNKNOW),
-                Timestamps = Plugin.startTimestamps
-            });
+            Utility.SetStatus(EventHandler.getTextFromState(EventHandler.State.UNKNOW));
         }
 
         private void Update()

@@ -1,5 +1,4 @@
 using static DiskCardGame.ViewController;
-using System.Collections.Generic;
 using DiskCardGame;
 using DiscordRPC;
 using System;
@@ -52,20 +51,7 @@ namespace InscryptionRichPresence
         internal static void onGameStateChanged(GameState state)
         {
             if (state != GameState.Map && state != GameState.FirstPerson3D) return;
-            API.PublicRichPresence.SetPresence(new RichPresence()
-            {
-                Assets = new Assets()
-                {
-                    LargeImageKey = "icon",
-                    LargeImageText = "Inscryption"
-                },
-                Buttons = (new List<DiscordRPC.Button> { new DiscordRPC.Button() {
-                    Label = "Play Inscryption",
-                    Url = "https://store.steampowered.com/app/1092790/Inscryption/"
-                }}).ToArray(),
-                State = state == GameState.FirstPerson3D ? "Walking around..." : getTextFromState(currentState),
-                Timestamps = currentState == State.UNKNOW ? Plugin.startTimestamps : Timestamps.Now
-            });
+            Utility.SetStatus(state == GameState.FirstPerson3D ? "Walking around..." : getTextFromState(currentState), currentState == State.UNKNOW ? Plugin.startTimestamps : Timestamps.Now);
         }
 
         internal static State getStateFromControlMode(ControlMode mode)
@@ -128,25 +114,9 @@ namespace InscryptionRichPresence
         {
             State previousState = currentState;
             currentState = getStateFromControlMode(mode);
-            string state = getTextFromState(currentState);
-            if (previousState != currentState)
-            {
-                if (currentState == State.UNKNOW) Plugin.logger.LogError($"Unknown Control Mode: {mode} (Please report to Dev)");
-                API.PublicRichPresence.SetPresence(new RichPresence()
-                {
-                    Assets = new Assets()
-                    {
-                        LargeImageKey = "icon",
-                        LargeImageText = "Inscryption"
-                    },
-                    Buttons = (new List<DiscordRPC.Button> { new DiscordRPC.Button() {
-                        Label = "Play Inscryption",
-                        Url = "https://store.steampowered.com/app/1092790/Inscryption/"
-                    }}).ToArray(),
-                    State = state,
-                    Timestamps = currentState == State.UNKNOW ? Plugin.startTimestamps : Timestamps.Now
-                });
-            }
+            if (previousState == currentState) return;
+            if (currentState == State.UNKNOW) Plugin.logger.LogError($"Unknown Control Mode: {mode} (Please report to Dev)");
+            Utility.SetStatus(getTextFromState(currentState), currentState == State.UNKNOW ? Plugin.startTimestamps : Timestamps.Now);
         }
 
     }
