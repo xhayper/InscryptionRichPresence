@@ -3,5 +3,5 @@
   "description": "Discord Rich Presence for Inscryption",
   "version_number": "0.0.4",
   "website_url": "https://github.com/xhayper/InscryptionRichPresence",
-  "dependencies": []
+  "dependencies": ["xhayper-RichPresenceAPI-0.0.4"]
 }
