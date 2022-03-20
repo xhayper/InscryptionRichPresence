@@ -10,9 +10,9 @@ namespace InscryptionRichPresence
     [BepInDependency("io.github.xhayper.RichPresenceAPI")]
     public class Plugin : BaseUnityPlugin
     {
-        internal static BepInEx.Logging.ManualLogSource logger;
-        internal static Harmony harmony;
-        internal static DiscordRpcClient client;
+        public static BepInEx.Logging.ManualLogSource logger;
+        public static Harmony harmony;
+        public static DiscordRpcClient client;
 
         public static Timestamps startTimestamps = Timestamps.Now;
 
