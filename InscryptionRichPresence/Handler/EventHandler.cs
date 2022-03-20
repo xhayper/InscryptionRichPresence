@@ -1,7 +1,6 @@
 using static DiskCardGame.ViewController;
 using DiskCardGame;
 using DiscordRPC;
-using System;
 
 namespace InscryptionRichPresence
 {
@@ -22,39 +21,15 @@ namespace InscryptionRichPresence
         }
 
 
-        internal static bool isActive = false;
-
         public static State currentState;
 
-        public static void Enable()
-        {
-            isActive = true;
-        }
-
-        public static void Disable()
-        {
-            isActive = false;
-        }
-
-        [Obsolete("SubscribeEvent is deprecated, please use Enable instead.")]
-        public static void SubscribeEvent()
-        {
-            Enable();
-        }
-
-        [Obsolete("UnsubscribeEvent is deprecated, please use Disable instead.")]
-        public static void UnsubscribeEvent()
-        {
-            Disable();
-        }
-
-        internal static void onGameStateChanged(GameState state)
+        public static void onGameStateChanged(GameState state)
         {
             if (state != GameState.Map && state != GameState.FirstPerson3D) return;
             Utility.SetStatus(state == GameState.FirstPerson3D ? "Walking around..." : getTextFromState(currentState), currentState == State.UNKNOW ? Plugin.startTimestamps : Timestamps.Now);
         }
 
-        internal static State getStateFromControlMode(ControlMode mode)
+        public static State getStateFromControlMode(ControlMode mode)
         {
             switch (mode)
             {
@@ -110,7 +85,7 @@ namespace InscryptionRichPresence
             }
         }
 
-        internal static void onViewControlModeSwitch(ControlMode mode)
+        public static void onViewControlModeSwitch(ControlMode mode)
         {
             State previousState = currentState;
             currentState = getStateFromControlMode(mode);

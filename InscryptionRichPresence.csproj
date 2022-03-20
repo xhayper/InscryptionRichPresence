@@ -26,4 +26,10 @@
 		<PackageReference Include="DiscordRichPresence" Version="1.0.175" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Reference Include="RichPresenceAPI">
+			<HintPath>lib/RichPresenceAPI.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
 </Project>

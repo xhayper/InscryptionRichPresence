@@ -9,7 +9,7 @@ namespace InscryptionRichPresence
         {
             if (Plugin.client == null) return;
             if (timestamp == null) timestamp = Plugin.startTimestamps;
-            API.PublicRichPresence.SetPresence(new RichPresence()
+            Plugin.client.SetPresence(new RichPresence()
             {
                 Assets = new Assets()
                 {

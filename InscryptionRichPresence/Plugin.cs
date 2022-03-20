@@ -1,42 +1,24 @@
-using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.Reflection;
-using BepInEx.Logging;
+using RichPresenceAPI.Logging;
 using DiscordRPC;
 using HarmonyLib;
-using System.IO;
 using BepInEx;
-using System;
 
 namespace InscryptionRichPresence
 {
-    [BepInPlugin(PluginGuid, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+    [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+    [BepInDependency("io.github.xhayper.RichPresenceAPI")]
     public class Plugin : BaseUnityPlugin
     {
-        internal const string PluginGuid = "io.github.xhayper.InscryptionRichPresence";
-        internal static string AssemblyDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        internal static ManualLogSource logger;
+        internal static BepInEx.Logging.ManualLogSource logger;
         internal static Harmony harmony;
         internal static DiscordRpcClient client;
-        internal static IntPtr libHandle;
 
         public static Timestamps startTimestamps = Timestamps.Now;
 
         private void Awake()
         {
-            string pathToDLL = $"{AssemblyDirectory}\\{PluginInfo.PLUGIN_NAME}\\NativeNamedPipe.dll";
-            if (!File.Exists(pathToDLL))
-            {
-                pathToDLL = $"{AssemblyDirectory}\\NativeNamedPipe.dll";
-                if (!File.Exists(pathToDLL))
-                    throw new Exception("Can't find the library file");
-            }
-            libHandle = Native.LoadLibrary(pathToDLL);
-            if (libHandle == IntPtr.Zero) throw new Exception(string.Format("Failed to load nessecary library (ErrorCode: {0})", Marshal.GetLastWin32Error()));
             logger = Logger;
-            harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginGuid);
-
-            API.PublicRichPresence.SetApplicationID("954242645834735617");
+            client = RichPresenceAPI.Utility.createClient("954242645834735617", -1, new BepInExLogger(logger));
             Utility.SetStatus(EventHandler.getTextFromState(EventHandler.State.UNKNOW));
         }
 
@@ -49,7 +31,6 @@ namespace InscryptionRichPresence
         {
             client.Dispose();
             harmony.UnpatchSelf();
-            Native.FreeLibrary(libHandle);
         }
     }
 }

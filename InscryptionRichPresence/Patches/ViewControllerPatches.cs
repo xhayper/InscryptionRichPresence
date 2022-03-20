@@ -10,7 +10,6 @@ namespace InscryptionRichPresence
         [HarmonyPostfix, HarmonyPatch(nameof(ViewController.SwitchToControlMode))]
         public static void SwitchToControlMode(ViewController.ControlMode mode)
         {
-            if (!EventHandler.isActive) return;
             EventHandler.onViewControlModeSwitch(mode);
         }
     }

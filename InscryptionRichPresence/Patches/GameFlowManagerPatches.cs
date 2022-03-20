@@ -10,7 +10,6 @@ namespace InscryptionRichPresence
         [HarmonyPostfix, HarmonyPatch(nameof(GameFlowManager.CurrentGameState), MethodType.Setter)]
         public static void CurrentGameState(GameState value)
         {
-            if (!EventHandler.isActive) return;
             EventHandler.onGameStateChanged(value);
         }
     }
