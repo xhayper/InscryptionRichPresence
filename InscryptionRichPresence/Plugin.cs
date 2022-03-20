@@ -13,7 +13,7 @@ namespace InscryptionRichPresence
     [BepInPlugin(PluginGuid, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
-        internal const string PluginGuid = "io.github.xhayper.inscryprionrichpresence";
+        internal const string PluginGuid = "io.github.xhayper.InscryptionRichPresence";
         internal static string AssemblyDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         internal static ManualLogSource logger;
         internal static Harmony harmony;

@@ -30,7 +30,7 @@ using BepInEx;
 namespace ExamplePlugin
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-    [BepInDependency("io.github.xhayper.inscryprionrichpresence")]
+    [BepInDependency("io.github.xhayper.InscryptionRichPresence")]
     public class Plugin : BaseUnityPlugin
     {
         private void Awake()
