@@ -19,6 +19,10 @@ namespace InscryptionRichPresence
                 Buttons = (new List<DiscordRPC.Button> { new DiscordRPC.Button() {
                     Label = "Buy Inscryption",
                     Url = "https://store.steampowered.com/app/1092790/Inscryption/"
+                },
+                new DiscordRPC.Button {
+                    Label = "Play Inscryption",
+                    Url = "steam://rungameid/1092790"
                 }}).ToArray(),
                 State = state,
                 Timestamps = timestamp
