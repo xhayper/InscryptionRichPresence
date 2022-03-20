@@ -1,4 +1,5 @@
 using RichPresenceAPI.Logging;
+using System.Reflection;
 using DiscordRPC;
 using HarmonyLib;
 using BepInEx;
@@ -18,6 +19,7 @@ namespace InscryptionRichPresence
         private void Awake()
         {
             logger = Logger;
+            harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginInfo.PLUGIN_GUID);
             client = RichPresenceAPI.Utility.createClient("954242645834735617", -1, new BepInExLogger(logger));
             Utility.SetStatus(EventHandler.getTextFromState(EventHandler.State.UNKNOW));
         }
