@@ -20,7 +20,7 @@ namespace InscryptionRichPresence
         {
             logger = Logger;
             harmony = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginInfo.PLUGIN_GUID);
-            client = RichPresenceAPI.Utility.createClient("954242645834735617", -1, new BepInExLogger(logger)
+            client = RichPresenceAPI.Utility.CreateDiscordRpcClient("954242645834735617", -1, new BepInExLogger(logger)
             {
                 Level = DiscordRPC.Logging.LogLevel.Info
             }, false);
