@@ -28,7 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="RichPresenceAPI">
+		<Reference Include="RichPresenceAPI" Private="false">
 			<HintPath>lib/RichPresenceAPI.dll</HintPath>
 		</Reference>
 	</ItemGroup>

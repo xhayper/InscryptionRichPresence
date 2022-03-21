@@ -3,7 +3,7 @@
 .cache/
 .idea/
 
-production/
+build/
 bin/
 lib/
 obj/

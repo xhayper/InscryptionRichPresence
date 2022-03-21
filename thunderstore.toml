@@ -1,0 +1,27 @@
+[config]
+schemaVersion = "0.0.1"
+
+[package]
+namespace = "xhayper"
+name = "InscryptionRichPresence"
+versionNumber = "0.0.7"
+description = "Discord Rich Presence for Inscryption"
+websiteUrl = "https://github.com/xhayper/InscryptionRichPresence"
+containsNsfwContent = false
+
+[package.dependencies]
+xhayper-RichPresenceAPI = "0.0.6"
+
+[build]
+icon = "./icon.png"
+readme = "./README.md"
+outdir = "./build"
+
+[[build.copy]]
+source = "bin/Release/InscryptionRichPresence.dll"
+target = "plugins/InscryptionRichPresence.dll"
+
+[publish]
+repository = "https://inscryption.thunderstore.io"
+communities = ["inscryption"]
+categories = ["misc"]
