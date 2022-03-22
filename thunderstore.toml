@@ -4,13 +4,13 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "xhayper"
 name = "InscryptionRichPresence"
-versionNumber = "0.0.7"
+versionNumber = "0.0.8"
 description = "Discord Rich Presence for Inscryption"
 websiteUrl = "https://github.com/xhayper/InscryptionRichPresence"
 containsNsfwContent = false
 
 [package.dependencies]
-xhayper-RichPresenceAPI = "0.0.6"
+xhayper-RichPresenceAPI = "0.0.7"
 
 [build]
 icon = "./icon.png"

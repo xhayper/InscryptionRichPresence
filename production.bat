@@ -1,2 +1,2 @@
 @ECHO OFF
-dotnet publish --configuration Release
+dotnet build --configuration Release
