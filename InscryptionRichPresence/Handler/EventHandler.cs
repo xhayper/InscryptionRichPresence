@@ -17,6 +17,8 @@ namespace InscryptionRichPresence
             TRADE_PELT,
             TRADE,
             MERGE_CARD,
+            TOTEM_SELECT,
+            TOTEM_BUILD,
             UNKNOW
         }
 
@@ -54,6 +56,10 @@ namespace InscryptionRichPresence
                     return State.TRADE;
                 case ControlMode.CardMerging:
                     return State.MERGE_CARD;
+                case ControlMode.TotemPieceSelection:
+                    return State.TOTEM_SELECT;
+                case ControlMode.TotemBuilding:
+                    return State.TOTEM_BUILD;
                 default:
                     return State.UNKNOW;
             }
@@ -79,6 +85,10 @@ namespace InscryptionRichPresence
                     return "Trading...";
                 case State.MERGE_CARD:
                     return "Merging card...";
+                case State.TOTEM_SELECT:
+                    return "Selecting a totem piece...";
+                case State.TOTEM_BUILD:
+                    return "Building a totem...";
                 case State.UNKNOW:
                 default:
                     return "Unknown state...";
