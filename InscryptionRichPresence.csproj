@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFramework>netstandard2.0</TargetFramework>
 		<AssemblyName>InscryptionRichPresence</AssemblyName>
 		<Description>Discord Rich Presence for Inscryption</Description>
 		<Version>0.0.8</Version>
